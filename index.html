@@ -1196,7 +1196,6 @@ function renderCart() {
     const subtotal = item.price * item.qty;
     total += subtotal;
     return `<div class="cart-item-row">
-totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * 0.06).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * 0.06).toFixed(2)}</span></div></div>`;
       <span class="ci-price">$${subtotal}</span>
       <button class="ci-remove" onclick="removeItem(${i})">✕</button>
     </div>`;
