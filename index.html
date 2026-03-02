@@ -1116,7 +1116,16 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.onclick = () => {
       const variant = hasOptions ? orderDiv.querySelector('.frag-select').value : null;
       if (hasOptions && !variant) { alert('Please choose a fragrance or option first! 🌸'); return; }
-      addToCart(name, variant, parseInt(qty.value), price);
+      const sizePrices = {
+  "Dreamland Delight Cream": { "Small": 9, "Large (2oz)": 21 },
+};
+
+let finalPrice = price;
+if (sizePrices[name] && variant && sizePrices[name][variant]) {
+  finalPrice = sizePrices[name][variant];
+}
+
+addToCart(name, variant, parseInt(qty.value), finalPrice);
       btn.textContent = '✓ Added!';
       btn.classList.add('added');
       setTimeout(() => { btn.textContent = '+ Add'; btn.classList.remove('added'); }, 1500);
