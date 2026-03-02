@@ -660,6 +660,12 @@
     margin: 14px 0 20px;
     font-weight: 700;
   }
+
+
+.cart-summary { width: 100%; margin-top: 14px; }
+.summary-row { display: flex; justify-content: space-between; font-family: 'Jost', sans-serif; font-size: 0.85rem; color: var(--dark); padding: 4px 0; }
+.summary-total { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1rem; color: var(--walnut); border-top: 1px solid var(--linen); margin-top: 6px; padding-top: 8px; }
+
   .cart-note {
     font-family: 'Jost', sans-serif;
     font-size: 0.8rem;
@@ -1196,7 +1202,7 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  totalEl.textContent = `Total: $${total}`;
+  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row summary-total"><span>Total</span><span>$${total.toFixed(2)}</span></div></div>`;
   totalEl.style.display = 'block';
   sendBtns.style.display = 'grid';
 }
