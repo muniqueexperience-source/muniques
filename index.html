@@ -1201,7 +1201,7 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row summary-total"><span>Total</span><span>$${total.toFixed(2)}</span></div></div>`;
+  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * 0.06).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * 0.06).toFixed(2)}</span></div></div>`;
   totalEl.style.display = 'block';
   sendBtns.style.display = 'grid';
 }
