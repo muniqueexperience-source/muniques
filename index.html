@@ -1073,7 +1073,7 @@ function getOptionsForProduct(name) {
 
 // ── INJECT ORDER CONTROLS INTO EACH PRODUCT ──
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.product-item').forEach(item => {
+  document.querySelectorAll('.product-item:not(.no-cart)').forEach(item => {
     const nameEl = item.querySelector('.product-name');
     const priceEl = item.querySelector('.price');
     if (!nameEl || !priceEl) return;
@@ -1359,7 +1359,7 @@ document.getElementById('cart-modal').addEventListener('click', function(e) {
       </div>
       <div class="price">$25</div>
     </div>
-    <div class="product-item">
+    <div class="product-item no-cart">
       <div>
         <div class="product-name">Clothing &amp; Accessories for Pets</div>
         <div class="product-desc">Ask us for details!</div>
