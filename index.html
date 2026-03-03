@@ -645,7 +645,13 @@
     color: var(--dark);
     gap: 8px;
   }
-  .cart-item-row .ci-name { flex: 1; }
+  .cart-item-row .ci-name {
+    flex: 1;
+    min-width: 0;
+    font-weight: 500;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
   .cart-item-row .ci-price { font-weight: 600; color: var(--walnut); white-space: nowrap; }
   .cart-item-row .ci-remove {
     background: none; border: none; color: #999;
@@ -1205,6 +1211,7 @@ function renderCart() {
     const subtotal = item.price * item.qty;
     total += subtotal;
     return `<div class="cart-item-row">
+      <span class="ci-name">${item.qty}× ${item.label}</span>
       <span class="ci-price">$${subtotal}</span>
       <button class="ci-remove" onclick="removeItem(${i})">✕</button>
     </div>`;
