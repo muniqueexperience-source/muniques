@@ -1274,9 +1274,11 @@ function clearCart() {
 }
 
 function buildOrderText() {
-  const lines = cart.map(i => `• ${i.qty}x ${i.label} — $${i.price * i.qty}`);
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  return `Hi! I'd like to place an order from M Unique S:\n\n${lines.join('\n')}\n\nTotal: $${total}\n\nPlease confirm availability. Thank you! 🌿`;
+  const lines = cart.map(i => `• ${i.qty}x ${i.label} — $${(i.price * i.qty).toFixed(2)}`);
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const tax = subtotal * 0.06;
+  const total = (subtotal + tax).toFixed(2);
+  return `Hi! I'd like to place an order from M Unique S:\n\n${lines.join('\n')}\n\nSubtotal: $${subtotal.toFixed(2)}\nTax (6%): $${tax.toFixed(2)}\nTotal: $${total}\n\nPlease confirm availability. Thank you! 🌿`;
 }
 
 function sendOrder(method) {
