@@ -1068,28 +1068,23 @@
     </div>
     <!-- PAYMENT LINKS ABOVE CLEAR ORDER -->
     <div style="display: flex; justify-content: center; gap: 25px; margin-top: 10px; margin-bottom: 20px;">
-
-      <!-- VENMO WITH TOTAL (removes $) -->
-      <a href="https://venmo.com/u/MUniqueS?amount={{OrderTotal.replace('$','')}}" target="_blank" rel="noopener noreferrer"
+      <a id="venmoLink" target="_blank" rel="noopener noreferrer"
          style="color: #4A2E1A; font-family: 'Aloja', sans-serif;
                 font-size: 1.15rem; font-weight: 600; text-decoration: none;">
         Venmo
       </a>
 
-      <!-- PAYPAL WITH TOTAL (removes $) -->
-      <a href="https://paypal.me/MUniqueS/{{OrderTotal.replace('$','')}}" target="_blank" rel="noopener noreferrer"
+      <a id="paypalLink" target="_blank" rel="noopener noreferrer"
          style="color: #4A2E1A; font-family: 'Aloja', sans-serif;
                 font-size: 1.15rem; font-weight: 600; text-decoration: none;">
         PayPal
       </a>
 
-      <!-- CASH APP WITH TOTAL (removes $) -->
-      <a href="https://cash.app/$MuniqueSe/{{OrderTotal.replace('$','')}}" target="_blank" rel="noopener noreferrer"
+      <a id="cashappLink" target="_blank" rel="noopener noreferrer"
          style="color: #4A2E1A; font-family: 'Aloja', sans-serif;
                 font-size: 1.15rem; font-weight: 600; text-decoration: none;">
         Cash App
       </a>
-
     </div>
 
     <button onclick="clearCart()" style="background:none;border:1px solid #ccc;color:#999;padding:7px 14px;border-radius:4px;font-size:0.8rem;cursor:pointer;width:100%;font-family:'Jost',sans-serif;">Clear Order</button>
@@ -1229,11 +1224,17 @@ function renderCart() {
   const container = document.getElementById('cart-items');
   const totalEl = document.getElementById('cart-total');
   const sendBtns = document.getElementById('send-btns');
+  const venmoLink = document.getElementById('venmoLink');
+  const paypalLink = document.getElementById('paypalLink');
+  const cashappLink = document.getElementById('cashappLink');
 
   if (cart.length === 0) {
     container.innerHTML = '<div class="cart-empty">Your order is empty.<br>Browse products and tap "+ Add" to get started!</div>';
     totalEl.style.display = 'none';
     sendBtns.style.display = 'none';
+    venmoLink.href = 'https://venmo.com/u/MUniqueS';
+    paypalLink.href = 'https://paypal.me/MUniqueS';
+    cashappLink.href = 'https://cash.app/$MuniqueSe';
     return;
   }
 
@@ -1249,6 +1250,10 @@ function renderCart() {
   }).join('');
 
   totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * 0.06).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * 0.06).toFixed(2)}</span></div></div>`;
+  const finalTotal = (total + total * 0.06).toFixed(2);
+  venmoLink.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
+  paypalLink.href = `https://paypal.me/MUniqueS/${finalTotal}`;
+  cashappLink.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
   totalEl.style.display = 'block';
   sendBtns.style.display = 'grid';
 }
