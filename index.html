@@ -1073,15 +1073,17 @@
       <button class="send-btn btn-ig" onclick="sendOrder('ig')">📸 Instagram DM</button>
       <button class="send-btn btn-fb" onclick="sendOrder('fb')">👍 Facebook</button>
       <button class="send-btn btn-tiktok" onclick="sendOrder('tiktok')">🎵 TikTok</button>
-      <button class="send-btn btn-pinterest" onclick="sendOrder('pinterest')">📌 Pinterest</button>
+      <div style="display: flex; justify-content: center; margin-bottom: 8px; width: 100%;">
+        <button class="send-btn btn-pinterest" onclick="sendOrder('pinterest')" style="width: 100%; background-color: #e60023; color: white; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;">📌 Pinterest</button>
+      </div>
 
       <!-- PAYMENT LINKS -->
-      <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin: 12px 0;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin: 8px 0 12px 0;">
         <a id="venmoLink"
            href="https://venmo.com/u/MUniqueS?amount=0"
            target="_blank"
            rel="noopener noreferrer"
-           style="font-weight:600; color:#333; text-decoration:none; font-size:15px;">
+           style="font-weight: 600; color: #333; text-decoration: none; font-size: 15px;">
            Venmo
         </a>
 
@@ -1089,7 +1091,7 @@
            href="https://paypal.me/MUniqueS/0"
            target="_blank"
            rel="noopener noreferrer"
-           style="font-weight:600; color:#333; text-decoration:none; font-size:15px;">
+           style="font-weight: 600; color: #333; text-decoration: none; font-size: 15px;">
            PayPal
         </a>
 
@@ -1097,7 +1099,7 @@
            href="https://cash.app/$MuniqueSe/0"
            target="_blank"
            rel="noopener noreferrer"
-           style="font-weight:600; color:#333; text-decoration:none; font-size:15px;">
+           style="font-weight: 600; color: #333; text-decoration: none; font-size: 15px;">
            Cash App
         </a>
       </div>
