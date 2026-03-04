@@ -1207,30 +1207,9 @@ function updateCartBubble() {
   bubble.style.display = total > 0 ? 'flex' : 'none';
 }
 
-function updatePaymentLinks(total) {
-  const amount = parseFloat(total).toFixed(2);
-  const note = encodeURIComponent('M Unique S Order');
-
-  document.getElementById('venmoLink').href =
-    `https://venmo.com/u/MUniqueS?txn=pay&amount=${amount}&note=${note}`;
-
-  document.getElementById('paypalLink').href =
-    `https://paypal.me/MUniqueS/${amount}`;
-
-  document.getElementById('cashappLink').href =
-    `https://cash.app/$MuniqueSe/${amount}`;
-}
-
 function openCart() {
   document.getElementById('cart-modal').classList.add('open');
   renderCart();
-
-  // ⭐ UPDATE PAYMENT LINKS AFTER POPUP IS VISIBLE
-  setTimeout(() => {
-    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const finalTotal = (total + total * 0.06).toFixed(2);
-    updatePaymentLinks(finalTotal);
-  }, 50); // small delay so buttons exist
 }
 
 function closeCart() {
@@ -1260,7 +1239,6 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  // DISPLAY TOTALS
   totalEl.innerHTML = `<div class="cart-summary">
     <div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div>
     <div class="summary-row"><span>Shipping</span><span>TBD</span></div>
@@ -1271,9 +1249,15 @@ function renderCart() {
   totalEl.style.display = 'block';
   sendBtns.style.display = 'grid';
 
-  // ⭐ CALCULATE FINAL TOTAL FOR PAYMENT BUTTONS
   const finalTotal = (total + total * 0.06).toFixed(2);
-  updatePaymentLinks(finalTotal);
+
+  const venmo = document.getElementById('venmoLink');
+  const paypal = document.getElementById('paypalLink');
+  const cashapp = document.getElementById('cashappLink');
+
+  if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
+  if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
+  if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
 }
 
 function removeItem(i) {
