@@ -1256,8 +1256,8 @@ function renderCart() {
   const paypal = document.getElementById('paypalLink');
   const cashapp = document.getElementById('cashappLink');
 
-  if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
-  if (paypal) paypal.href = `https://www.paypal.com/paypalme/MUniqueS/${finalTotal}`;
+  if (venmo) venmo.href = `https://venmo.com/MUniqueS?txn=pay&amount=${finalTotal}&note=M%20Unique%20S%20Order`;
+  if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
   if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
 }
 
