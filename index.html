@@ -1221,6 +1221,7 @@ function closeCart() {
 }
 
 function renderCart() {
+  const TAX_RATE = 0.06;
   const container = document.getElementById('cart-items');
   const totalEl = document.getElementById('cart-total');
   const sendBtns = document.getElementById('send-btns');
@@ -1249,8 +1250,12 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * 0.06).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * 0.06).toFixed(2)}</span></div></div>`;
-  const finalTotal = (total + total * 0.06).toFixed(2);
+  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * TAX_RATE).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * TAX_RATE).toFixed(2)}</span></div></div>`;
+
+  // -------------------------------------------------------
+  // CALCULATE TOTAL + INJECT INTO PAYMENT LINKS
+  // -------------------------------------------------------
+  const finalTotal = (total + total * TAX_RATE).toFixed(2);
   venmoLink.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
   paypalLink.href = `https://paypal.me/MUniqueS/${finalTotal}`;
   cashappLink.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
