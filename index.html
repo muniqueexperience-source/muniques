@@ -1214,6 +1214,20 @@ function updateCartBubble() {
 function openCart() {
   document.getElementById('cart-modal').classList.add('open');
   renderCart();
+
+  // ⭐ UPDATE PAYMENT LINKS AFTER POPUP IS VISIBLE
+  setTimeout(() => {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const finalTotal = (total + total * 0.06).toFixed(2);
+
+    const venmo = document.getElementById("venmoLink");
+    const paypal = document.getElementById("paypalLink");
+    const cashapp = document.getElementById("cashappLink");
+
+    if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
+    if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
+    if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
+  }, 50); // small delay so buttons exist
 }
 
 function closeCart() {
