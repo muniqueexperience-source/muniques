@@ -1487,23 +1487,38 @@ document.getElementById('cart-modal').addEventListener('click', function(e) {
     Scan or tap to pay
   </p>
 
-  <div style="display: flex; justify-content: center; gap: 25px; margin-top: 15px; margin-bottom: 25px;">
-    <a class="social-button" href="https://venmo.com/u/MUniqueS" target="_blank" rel="noopener noreferrer"
-       style="color: #F5E9D6; font-family: 'Aloja', sans-serif;
-              font-size: 1.2rem; font-weight: 600; text-decoration: none;">
-      Venmo
+  <div style="
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:22px;
+      margin-top:12px;
+      margin-bottom:18px;
+      flex-wrap:nowrap;
+      width:100%;
+  ">
+    <a id="venmoLink"
+       href="https://venmo.com/u/MUniqueS?amount=0"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color:#4A2E1A; font-family:'Aloja',sans-serif; font-size:1rem; font-weight:600; text-decoration:none; white-space:nowrap;">
+       Venmo
     </a>
 
-    <a class="social-button" href="https://paypal.me/MUniqueS" target="_blank" rel="noopener noreferrer"
-       style="color: #F5E9D6; font-family: 'Aloja', sans-serif;
-              font-size: 1.2rem; font-weight: 600; text-decoration: none;">
-      PayPal
+    <a id="paypalLink"
+       href="https://paypal.me/MUniqueS/0"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color:#4A2E1A; font-family:'Aloja',sans-serif; font-size:1rem; font-weight:600; text-decoration:none; white-space:nowrap;">
+       PayPal
     </a>
 
-    <a class="social-button" href="https://cash.app/$MuniqueSe" target="_blank" rel="noopener noreferrer"
-       style="color: #F5E9D6; font-family: 'Aloja', sans-serif;
-              font-size: 1.2rem; font-weight: 600; text-decoration: none;">
-      Cash App
+    <a id="cashappLink"
+       href="https://cash.app/$MuniqueSe/0"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color:#4A2E1A; font-family:'Aloja',sans-serif; font-size:1rem; font-weight:600; text-decoration:none; white-space:nowrap;">
+       Cash App
     </a>
   </div>
 </div>
