@@ -1207,6 +1207,20 @@ function updateCartBubble() {
   bubble.style.display = total > 0 ? 'flex' : 'none';
 }
 
+function updatePaymentLinks(total) {
+  const amount = parseFloat(total).toFixed(2);
+  const note = encodeURIComponent('M Unique S Order');
+
+  document.getElementById('venmoLink').href =
+    `https://venmo.com/u/MUniqueS?txn=pay&amount=${amount}&note=${note}`;
+
+  document.getElementById('paypalLink').href =
+    `https://paypal.me/MUniqueS/${amount}`;
+
+  document.getElementById('cashappLink').href =
+    `https://cash.app/$MuniqueSe/${amount}`;
+}
+
 function openCart() {
   document.getElementById('cart-modal').classList.add('open');
   renderCart();
@@ -1215,14 +1229,7 @@ function openCart() {
   setTimeout(() => {
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const finalTotal = (total + total * 0.06).toFixed(2);
-
-    const venmo = document.getElementById("venmoLink");
-    const paypal = document.getElementById("paypalLink");
-    const cashapp = document.getElementById("cashappLink");
-
-    if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
-    if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
-    if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
+    updatePaymentLinks(finalTotal);
   }, 50); // small delay so buttons exist
 }
 
@@ -1266,15 +1273,7 @@ function renderCart() {
 
   // ⭐ CALCULATE FINAL TOTAL FOR PAYMENT BUTTONS
   const finalTotal = (total + total * 0.06).toFixed(2);
-
-  // ⭐ UPDATE PAYMENT LINKS
-  const venmo = document.getElementById('venmoLink');
-  const paypal = document.getElementById('paypalLink');
-  const cashapp = document.getElementById('cashappLink');
-
-  if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
-  if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
-  if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
+  updatePaymentLinks(finalTotal);
 }
 
 function removeItem(i) {
