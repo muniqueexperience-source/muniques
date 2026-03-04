@@ -1221,31 +1221,14 @@ function closeCart() {
 }
 
 function renderCart() {
-  const TAX_RATE = 0.06;
   const container = document.getElementById('cart-items');
   const totalEl = document.getElementById('cart-total');
   const sendBtns = document.getElementById('send-btns');
-  const venmoLink = document.getElementById('venmoLink');
-  const paypalLink = document.getElementById('paypalLink');
-  const cashappLink = document.getElementById('cashappLink');
-
-  const updatePaymentLinks = (orderTotal) => {
-    // -------------------------------------------------------
-    // CALCULATE TOTAL + INJECT INTO PAYMENT LINKS
-    // -------------------------------------------------------
-    const finalTotal = (orderTotal + orderTotal * TAX_RATE).toFixed(2);
-    venmoLink.href = `https://venmo.com/u/MUniqueS?amount=${encodeURIComponent(finalTotal)}`;
-    paypalLink.href = `https://paypal.me/MUniqueS/${finalTotal}`;
-    cashappLink.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
-  };
 
   if (cart.length === 0) {
-    container.innerHTML = '<div class="cart-empty">Your order is empty.<br>Browse products and tap "+ Add" to get started!</div>';
+    container.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
     totalEl.style.display = 'none';
     sendBtns.style.display = 'none';
-    venmoLink.href = 'https://venmo.com/u/MUniqueS';
-    paypalLink.href = 'https://paypal.me/MUniqueS';
-    cashappLink.href = 'https://cash.app/$MuniqueSe';
     return;
   }
 
@@ -1260,11 +1243,28 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  totalEl.innerHTML = `<div class="cart-summary"><div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div><div class="summary-row"><span>Shipping</span><span>TBD</span></div><div class="summary-row"><span>Tax (6%)</span><span>$${(total * TAX_RATE).toFixed(2)}</span></div><div class="summary-row summary-total"><span>Total</span><span>$${(total + total * TAX_RATE).toFixed(2)}</span></div></div>`;
+  // DISPLAY TOTALS
+  totalEl.innerHTML = `<div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div>
+    <div class="summary-row"><span>Shipping</span><span>TBD</span></div>
+    <div class="summary-row"><span>Tax (6%)</span><span>$${(total * 0.06).toFixed(2)}</span></div>
+    <div class="summary-row summary-total"><span>Total</span><span>$${(total + total * 0.06).toFixed(2)}</span></div>
+  </div>`;
 
-  updatePaymentLinks(total);
   totalEl.style.display = 'block';
   sendBtns.style.display = 'grid';
+
+  // ⭐ CALCULATE FINAL TOTAL FOR PAYMENT BUTTONS
+  const finalTotal = (total + total * 0.06).toFixed(2);
+
+  // ⭐ UPDATE PAYMENT LINKS
+  const venmo = document.getElementById('venmoLink');
+  const paypal = document.getElementById('paypalLink');
+  const cashapp = document.getElementById('cashappLink');
+
+  if (venmo) venmo.href = `https://venmo.com/u/MUniqueS?amount=${finalTotal}`;
+  if (paypal) paypal.href = `https://paypal.me/MUniqueS/${finalTotal}`;
+  if (cashapp) cashapp.href = `https://cash.app/$MuniqueSe/${finalTotal}`;
 }
 
 function removeItem(i) {
