@@ -1842,8 +1842,19 @@ function showFragranceProducts(btn) {
   } else {
     details.innerHTML = '';
   }
+  const fragranceFreeHiddenProducts = [
+    'wool-dryer-refill',
+    'hair-fragrance',
+    'hair-fragrance-set',
+    'linen-spray',
+    'shower-steamers',
+    'bath-bombs'
+  ];
+
   const visibleProducts = fragrance === 'Fragrance Free'
-    ? fragranceProducts.filter(p => p.id !== 'wool-dryer-refill')
+    ? fragranceProducts
+        .filter(p => !fragranceFreeHiddenProducts.includes(p.id))
+        .concat([{ name: "Detergent Strips &mdash; Sensitive Skin Formula", id: "detergent-strips-sensitive" }])
     : fragranceProducts;
 
   list.innerHTML = visibleProducts.map(p =>
